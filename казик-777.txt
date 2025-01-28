@@ -1,0 +1,138 @@
+// HTML
+<!DOCTYPE html>
+<html>
+<head>
+  <title>КАЗИНО</title>
+  <style>
+    body {
+      background-color: #C9E4CA; /* soft mint background */
+    }
+    #wheel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #000000; /* black wheel */
+      border-radius: 50%;
+      padding: 20px;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #wheel-numbers {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 24px;
+      color: #FF0000; /* red numbers */
+    }
+    #wheel-numbers span {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: rotate(72deg);
+    }
+    #wheel-numbers span:nth-child(2) {
+      transform: rotate(144deg);
+    }
+    #wheel-numbers span:nth-child(3) {
+      transform: rotate(216deg);
+    }
+    #wheel-numbers span:nth-child(4) {
+      transform: rotate(288deg);
+    }
+    #wheel-numbers span:nth-child(5) {
+      transform: rotate(360deg);
+    }
+    #balance {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000000; /* black background */
+      color: #FFFF00; /* bright yellow text */
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 24px;
+    }
+    #input-field {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #00FF00; /* green background */
+      border: 2px solid #FFC0CB; /* pink border */
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 24px;
+    }
+    #spin-button {
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #000000; /* black button */
+      color: #FFFF00; /* bright yellow text */
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    #result-field {
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      background-color: #FFC0CB; /* pink background */
+      color: #4682B4; /* blue-green text */
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+<body>
+  <p id="balance">Balance: 5000</p>
+  <button id="spin-button">Крутить</button>
+  <div id="wheel">
+    <div id="wheel-numbers">
+      <span>5</span>
+      <span>13</span>
+      <span>21</span>
+      <span>17</span>
+      <span>30</span>
+    </div>
+  </div>
+  <div id="result-field"></div>
+  <input id="input-field" type="number" placeholder="Enter a number">
+  <script>
+    let balance = 5000;
+    const balanceElement = document.getElementById('balance');
+    const inputField = document.getElementById('input-field');
+    const spinButton = document.getElementById('spin-button');
+    const resultField = document.getElementById('result-field');
+
+    spinButton.addEventListener('click', () => {
+      const randomNumber = getRandomNumber();
+      const userNumber = parseInt(inputField.value);
+      resultField.textContent = `Result: ${randomNumber}`;
+      if (userNumber === randomNumber) {
+        balance += 1000;
+        balanceElement.textContent = `Balance: ${balance}`;
+      } else {
+        balance -= 100;
+        balanceElement.textContent = `Balance: ${balance}`;
+      }
+      inputField.value = '';
+    });
+
+    function getRandomNumber() {
+      const numbers = [5, 13, 21, 17, 30];
+      return numbers[Math.floor(Math.random() * numbers.length)];
+    }
+  </script>
+</body>
+</html>

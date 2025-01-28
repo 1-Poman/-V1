@@ -1,0 +1,93 @@
+// HTML
+<!DOCTYPE html>
+<html>
+<head>
+  <title>КАЗИНО-777</title>
+  <style>
+    body {
+      background-color: #9966FF; /* purple background */
+    }
+    #balance {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #7A288A; /* violet background */
+      color: #FFFF00; /* bright yellow text */
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 24px;
+    }
+    #buttons {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+    }
+    .button {
+      background-color: #4682B4; /* blue button */
+      color: #FF69B4; /* bright pink text */
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .button.active {
+      background-color: #FF69B4; /* bright pink button */
+      color: #4682B4; /* blue text */
+    }
+    .button.win {
+      background-color: #00FF00; /* green button */
+    }
+    .button.lose {
+      background-color: #FF0000; /* red button */
+    }
+  </style>
+</head>
+<body>
+  <p id="balance">Баланс: <span id="balance-value">5000</span></p>
+  <div id="buttons">
+    <button class="button" id="button-5">5</button>
+    <button class="button" id="button-13">13</button>
+    <button class="button" id="button-21">21</button>
+    <button class="button" id="button-19">19</button>
+    <button class="button" id="button-30">30</button>
+  </div>
+
+  <script>
+    let balance = 5000;
+    const balanceElement = document.getElementById('balance-value');
+    const buttons = document.querySelectorAll('.button');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        button.classList.add('active');
+        setTimeout(() => {
+          const randomNumber = getRandomNumber();
+          if (button.textContent === randomNumber.toString()) {
+            balance += 1000;
+            button.classList.add('win');
+          } else {
+            balance -= 200;
+            button.classList.add('lose');
+          }
+          balanceElement.textContent = balance.toString();
+          setTimeout(() => {
+            buttons.forEach(button => {
+              button.classList.remove('active', 'win', 'lose');
+            });
+          }, 4000);
+        }, 4000);
+      });
+    });
+
+    function getRandomNumber() {
+      const numbers = [5, 13, 21, 19, 30];
+      return numbers[Math.floor(Math.random() * numbers.length)];
+    }
+  </script>
+</body>
+</html>

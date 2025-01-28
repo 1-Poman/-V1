@@ -1,0 +1,37 @@
+body {
+    color: #000102ca;
+    background-color: rgb(129, 199, 230);
+    font-family: "Roboto", sans-serif;
+    font-size: 20 px;
+}
+
+header {
+    color: white;
+    background-color: darkblue;
+    margin: 10 px;
+    padding: 100px;
+    border-color: #749ed3;
+    border-style: solid;
+    border-radius: 64px;
+}
+
+#text-main, #text-main1, #text-main2  {
+    box-shadow: 0px 0px 5px 5px rgba(42, 44, 44, 0.3);
+}
+
+h1 {
+    font-size: 55 px;
+}
+
+h2 {
+    color: black;
+}
+
+b, i, del {
+    background-color: aquamarine;
+}
+
+a {
+    color: red;
+}
+
